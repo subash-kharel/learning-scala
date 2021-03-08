@@ -1,31 +1,32 @@
-//HIgher order functions are those functions which are abel to take functions as arguments and able to
-//return function as a result
+import java.util.Date
+//partially applied functions
 
 object Demo {
 
-  def math( x:Double, y:Double,functionName: (Double, Double)=> Double): Double = functionName(x,y)
 
-  def math( x:Double, y:Double, z: Double, functionName: (Double, Double)=> Double): Double = functionName(functionName(x,y),z)
-
-
+  def log(date: Date, message: String) = {
+    println("this is "+ date.getHours + " hours and "+  date.getSeconds + " seconds with the message " + message)
+  }
 
   def main(args: Array[String]): Unit = {
-    //this result constant takes two double values and the function to add as a parament
-     val result = math(50, 20, (x,y)=>x+y)
-    //this should pring 70
-     println(result)
 
-    val multiply = math(2,3, (x,y) => x*y)
-    //this should pring 6.0
-    println(multiply)
+    val sum = (a: Int, b: Int, c: Int) => a +b +c
 
-    //this will add the first two params first and the invokes the same function to add result to the third paramenter
-    val addWithThreeArguments = math(1,2,3,(x,y)=> x+y)
-    println(addWithThreeArguments)
+    //fully applied function example ( calling function will all arguments)
+    println(sum(1,2,3));
 
-    // using wildcard _ also does the same thing like the function above
-    val addWithThreeArguments1 = math(1,2,3, _+_)
-    println(addWithThreeArguments)
+    //this is an example of partially applied function, this will print 310
+    var f = sum(10,_:Int,_ :Int)
+    println(f(100,200));
+
+    //this is also an example of partially applied function
+    //we know the date will stay same through out while only message is changing so creating a function with _ as an argument
+    //will make that argument a defined argument.
+    val date = new Date
+    val newLog = log(date, _ :String);
+    newLog("This is message 1");
+    newLog("This is message 2");
+    newLog("This is message 3");
 
 }
 }
