@@ -1,28 +1,27 @@
-//Scala- Closures
-// A closure is a funtion which uses one or more variables declared outside this function.
+// Scala - Currying
+//Currying is a technique of transforming a function that takes multiple arguments in to a funtion
+//  that takes a single argument
 
 object Demo {
 
-  //if this number variable is a const value then it is called pure closure because the value cannot be
-  //changed
-  var number = 10;
-  //this is an example of closure it uses variable number which is declared outside the function
-  // number variable is also called free variable.
-  val add = (x:Int) => x + number;
+  def add (x:Int, y:Int) = x +y
 
-  var number1 = 20;
-  val add1 = (x:Int)=> {
-    number1 = x + number1;
-    number1;
-  }
+
+  //transforming above function in to currying technique
+
+  def add1(x:Int) = (y : Int) => x +y
+
+  //scala way of defining a currying function
+  def add2(x:Int) (y:Int) = x+y
 
   def main(args: Array[String]): Unit = {
 
+    println(add(20,10))
+// implementating curying
+    println(add1(20)(10))
 
-    println(add(20))
-
-    //overwriting the number1 value
-   number1 = 100;
-    println(add1(10))
+    //another way of implementing currying
+    val sum40 = add1(40);
+    println(sum40(100))
 }
 }
