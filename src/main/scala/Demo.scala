@@ -1,32 +1,28 @@
-import java.util.Date
-//partially applied functions
+//Scala- Closures
+// A closure is a funtion which uses one or more variables declared outside this function.
 
 object Demo {
 
+  //if this number variable is a const value then it is called pure closure because the value cannot be
+  //changed
+  var number = 10;
+  //this is an example of closure it uses variable number which is declared outside the function
+  // number variable is also called free variable.
+  val add = (x:Int) => x + number;
 
-  def log(date: Date, message: String) = {
-    println("this is "+ date.getHours + " hours and "+  date.getSeconds + " seconds with the message " + message)
+  var number1 = 20;
+  val add1 = (x:Int)=> {
+    number1 = x + number1;
+    number1;
   }
 
   def main(args: Array[String]): Unit = {
 
-    val sum = (a: Int, b: Int, c: Int) => a +b +c
 
-    //fully applied function example ( calling function will all arguments)
-    println(sum(1,2,3));
+    println(add(20))
 
-    //this is an example of partially applied function, this will print 310
-    var f = sum(10,_:Int,_ :Int)
-    println(f(100,200));
-
-    //this is also an example of partially applied function
-    //we know the date will stay same through out while only message is changing so creating a function with _ as an argument
-    //will make that argument a defined argument.
-    val date = new Date
-    val newLog = log(date, _ :String);
-    newLog("This is message 1");
-    newLog("This is message 2");
-    newLog("This is message 3");
-
+    //overwriting the number1 value
+   number1 = 100;
+    println(add1(10))
 }
 }
