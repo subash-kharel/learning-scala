@@ -1,40 +1,47 @@
 object Demo {
 
-  def add(x : Int, y : Int): Int = {
-    return x +y
-  }
-
-  def subtract(x : Int, y : Int): Int = {
-
-    //return is optional in scala if the last line is the return.
-     x - y
-  }
-
-  //return is also optional here.
-  def multiply(x : Int, y : Int): Int = return x * y
-
-  //if we are certain that the divide will always return integer then we can remove te return type as well
-  def divide(x : Int, y : Int) =  x / y
-
   object Math {
-    def add(x : Int, y : Int): Int = {
+    def add(x : Int = 45, y : Int = 15): Int = {
+      return x +y
+    }
+
+    //could use operaters in scala as function name.
+    def +(x : Int = 45, y : Int = 15): Int = {
       return x +y
     }
 
     def square(x: Int) = x *x
+
+  }
+
+
+  // return type Unit is like a void in java
+  def printExample(x: Int, y: Int): Unit = {
+    println(x+y)
   }
 
   def main(args: Array[String]): Unit ={
+    //This will word even though the method is expection 2 params because we have set the default values for the
+    //parameters when the values are not provided.
+      println(Math.add())
 
-    println(add(3,2))
-    println(subtract(3,2))
-    println(multiply(3,2))
-    println(divide(3,2))
-    println(Math.add(4,5))
-    //both ways to call square are valid
-    println(Math.square(3))
-    //this only works when function takes only one argument
-    println(Math square 3)
+    //this we get result of 25 because this function will take 10 as the first parameter
+      println(Math.add(10))
+
+    //this will return 20
+      println(Math.add(10, 10))
+
+    //this will print result of x+y
+     printExample(1,2)
+
+
+    //This will print the sum of 1 and 4 and + is not the operator here but the funtionName.
+    println( Math.+(1,4))
+
+    //this is an example of anonymous function
+    var add = (x:Int , y:Int)=>x+y
+    println("THis is an example of anonymous function "+ add(1,3))
+
   }
 
 }
