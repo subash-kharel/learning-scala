@@ -1,27 +1,35 @@
-// Scala - Currying
-//Currying is a technique of transforming a function that takes multiple arguments in to a funtion
-//  that takes a single argument
+//Scala - Arrays
 
 object Demo {
 
-  def add (x:Int, y:Int) = x +y
+  //declaring an array
+  val myArray: Array[Int] = new Array[Int](4)
 
+  //another way of declaring an array
+  val myArray2 = new Array[Int](5)
 
-  //transforming above function in to currying technique
-
-  def add1(x:Int) = (y : Int) => x +y
-
-  //scala way of defining a currying function
-  def add2(x:Int) (y:Int) = x+y
-
+  //another way of initializing an array
+ val myArray3 = Array(1,2,3,4,5,6)
   def main(args: Array[String]): Unit = {
 
-    println(add(20,10))
-// implementating curying
-    println(add1(20)(10))
+    //assigning valaue to an array
+    myArray(0) = 1
+    myArray(1) = 2
+    myArray(2) = 3
+    myArray(3) = 4
 
-    //another way of implementing currying
-    val sum40 = add1(40);
-    println(sum40(100))
+    //this is just print the object reference which is why we needed the for loop
+    println(myArray)
+
+    for(x <- 0 to (myArray.length -1)){
+      println(x)
+    }
+
+    val concatinatedArray = Array.concat(myArray,myArray2);
+    println ("concatination starts here---->")
+     for(i <-concatinatedArray){
+
+       println(i)
+     }
 }
 }
