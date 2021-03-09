@@ -1,35 +1,50 @@
-//Scala - Arrays
+//Scala - Lists
+//Unlike arrays lists are immutable i.e. cannot change the value in the list once initialized.
 
+//Cons is short for construct and comes from Lisp which has weird names for things; things like car and cdr.
+//It means construct a new list.
+//
+//A cons A (or A :: B) means create a new list with A before B, where B can be a list item or a list itself and A is a list item.
 object Demo {
 
-  //declaring an array
-  val myArray: Array[Int] = new Array[Int](4)
+  val myList: List[Int] = List(1,2,4,5,6);
 
-  //another way of declaring an array
-  val myArray2 = new Array[Int](5)
+  val myListOfNames: List[String] = List("Max", "Tom","Subash")
 
-  //another way of initializing an array
- val myArray3 = Array(1,2,3,4,5,6)
   def main(args: Array[String]): Unit = {
 
-    //assigning valaue to an array
-    myArray(0) = 1
-    myArray(1) = 2
-    myArray(2) = 3
-    myArray(3) = 4
+    //this will print List(1, 2, 4, 5, 6)
+    println(myList);
 
-    //this is just print the object reference which is why we needed the for loop
-    println(myArray)
+    //this will print List(Max, Tom, Subash)
+    println(myListOfNames)
 
-    for(x <- 0 to (myArray.length -1)){
-      println(x)
-    }
+    //O cons myList will prepend the 0 infront of a list
+    println(0 :: myList)
 
-    val concatinatedArray = Array.concat(myArray,myArray2);
-    println ("concatination starts here---->")
-     for(i <-concatinatedArray){
+    //this will print List(1, 5, 9) because Nil means empty list and it adds 1,2,9 on that empty list.
+    println(1 :: 5 :: 9 :: Nil)
 
-       println(i)
-     }
+    //get first value of the list
+    println(myList.head)
+
+    //get all values that is not head
+    println(myList.tail)
+
+/*this  will print
+  1
+    2
+    4
+    5
+    6 */
+
+    myList.foreach(println)
+
+    //This will add all items in the list and print the sum
+    var sum: Int = 0
+    //this _ is a placeholder which will be be stream of value coming from the list
+    myList.foreach(sum += _)
+    println(sum)
+
 }
 }
