@@ -1,56 +1,36 @@
 //Scala - Sets
+
+// you cannot have duplicate keys in a map ( if there are duplicates it will override the key using last key
 object Demo {
 
-  //sets are immutable in scala but we can make them mutable doing this:
-  var mySetMutable = scala.collection.mutable.Set(1,2,3,4,4,5,6,7);
+  val myMap : Map[Int, String] = Map(101 -> "subash", 102 -> "minu")
 
-  var mySet: Set[Int] = Set(1,2,3,4,4,5,6,7,2)
+  val myMap2 : Map[Int, String] = Map(103 -> "aurora")
 
-  var mySet2 : Set[Int] = Set( 2,4,6,8,10)
 
   def main(args: Array[String]): Unit = {
 
-    //this line with print: HashSet(1, 2, 3, 4, 5, 6, 7)
-    println(mySetMutable)
-    //making use of mutable set by adding to a set
-    mySetMutable = mySetMutable+45
-    //this line will print: HashSet(1, 2, 3, 4, 5, 6, 7, 45)
-    println(mySetMutable)
 
+    println(myMap)
 
-    //checking if a value exist in a set, this will return true because 6 exists in the set mySet, Contains?
-    println(mySet(6))
+    //get value using key
+    println(myMap(101))
 
-    //first element in the set
-    println(mySet.head)
-    //get all elements except head
-    println(mySet.tail)
+    println(myMap.keys)
 
-    //checks if the set is empty
-    println(mySet.isEmpty)
+    println(myMap.values)
 
-    print("Concatinating two sets :")
-    println(mySet ++ mySet2)
+    println(myMap.isEmpty)
 
-    print("Another way of Concatinating two sets :")
-    println(mySet.++( mySet2))
-
-    //This gives the common elements between two sets.
-    println(mySet.&(mySet2))
-
-    //this is same as above
-    println(mySet.intersect(mySet2))
-
-    //gets the max
-    println(mySet.max)
-
-    //prints every single elements in the set
-    mySet.foreach(println)
-
-    println("-------------")
-    for(set <-mySet){
-      println(set);
+    //iterating a map
+    myMap.keys.foreach {
+      key => println("Key : "+ key)
+             println("value: "+ myMap(key))
     }
 
+    //this checks if the key is present and will return a boolean
+    println(myMap.contains(101))
+
+    println(myMap ++ myMap2);
 }
 }
