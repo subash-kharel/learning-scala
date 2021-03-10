@@ -1,4 +1,4 @@
-//Scala - Sets
+//Scala - Map
 
 // you cannot have duplicate keys in a map ( if there are duplicates it will override the key using last key
 object Demo {
