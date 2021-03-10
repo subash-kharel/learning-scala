@@ -1,21 +1,21 @@
-//Scala - Class
+//Scala - Auxilary
 
-//this is how you define class
-
-//class User;
-
-//creating class with constructer
-//need to add var infront
-//can add access modifier
-
-//class User(var name: String, private var age: Int)
+//  -------------- Getter    Setter
+//  var           yes         yes
+//  val           yes         no
+//  default       no          no
 
 
-//you can add curly braces to add a method to a class to acess private values
+// aux constructors are the alternative constructors for the class
 class User(var name: String, private var age: Int){
 
-  def printAge(age: Int): Unit = {
-    println(s"The age is $age")
+  //whenever you create a auxillary constructor you need to call the previously defined constructor
+  def this(){
+    this("Tom", 32)
+  }
+
+  def this(name: String){
+    this()
   }
 }
 
@@ -28,13 +28,6 @@ object Demo {
   def main(args:Array[String]): Unit ={
     //creating an instance of class
     var user = new User("Max", 28)
-    //this will print Max
-    println(user.name)
 
-    //overwriting name
-    user.name = "subash"
-    println(user.name)
-
-    user.printAge(25)
   }
 }
