@@ -1,36 +1,35 @@
-//Scala - Map
-
-// you cannot have duplicate keys in a map ( if there are duplicates it will override the key using last key
+//Scala - Tuples
+// It is a class that can contains different elements of different data types ( hetrogenous datatypes)
+//Tuples are immutable so once defined it cannot be changed.
 object Demo {
 
-  val myMap : Map[Int, String] = Map(101 -> "subash", 102 -> "minu")
+  //one way to declare a tuple
+  val myTuple = (1, "Subash", true, '3');
 
-  val myMap2 : Map[Int, String] = Map(103 -> "aurora")
-
+  //second way to declare a tuple, the Number Tuple3 means that this tuple contains 3 elements
+  //The most elements that can be added using this approach is 22
+  val myTuple1 = new Tuple3(1, "Subash", false)
 
   def main(args: Array[String]): Unit = {
 
 
-    println(myMap)
+    println(myTuple)
 
-    //get value using key
-    println(myMap(101))
+    //this will print  subash because it will print second element in the tuple.
+    println(myTuple._2)
 
-    println(myMap.keys)
-
-    println(myMap.values)
-
-    println(myMap.isEmpty)
-
-    //iterating a map
-    myMap.keys.foreach {
-      key => println("Key : "+ key)
-             println("value: "+ myMap(key))
+    //this will print all elements in tuples, we used productIterator because i  can iterate over any type
+    myTuple.productIterator.foreach{
+      i => println(i)
     }
 
-    //this checks if the key is present and will return a boolean
-    println(myMap.contains(101))
+    //we could create a tuple this way as well, the result here looks like this: (1,subash)
+    println(1 -> "subash")
 
-    println(myMap ++ myMap2);
-}
+    //the result looks like this: ((1,subash),true)
+    println(1 -> "subash" -> true)
+
+
+
+  }
 }
