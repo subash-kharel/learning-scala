@@ -1,44 +1,41 @@
-//Scala - map, filter
+//Scala - reduce, fold or scan (Left/Right)
+//reduceLeft, reduceRight, foldLeft, foldRight, scanLeft, scanRight
 
 
 object Demo {
 
-  val lst = List(1,2,3,4,5,6,10,13,15)
+  val lst = List(1,2,3,5,7,10,13)
 
-  val myMap = Map(1 ->"Subash", 2->"Minu", 3 -> "Aurora", 4 -> "Arish")
+  val lst2 = List("A", "B", "C")
+
 
   def main(args: Array[String]): Unit = {
 
-    //this will return the double of each number in the List lst.
-    println(lst.map(_*2))
+    //first two item in list is added and again the result is added to the next item in the list
+    //for this result is: ABC
+    println(lst2.reduceLeft(_ + _))
 
-    //this is similar to how java does it and does the same thing as above
-    println(lst.map(x => x *2))
+    //the result here is: 41
+    println(lst.reduceLeft(_ + _))
 
-    //this will print: List(hi(1,Subash), hi(2,Minu), hi(3,Aurora), hi(4,Arish))
-    println(myMap.map(x => "hi" +x))
+    //this is same as above
+    println(lst.reduceLeft((x,y)=> x+y))
 
-    //this will print: Map(1 -> Subash, 2 -> Minu, 3 -> Aurora, 4 -> Arish)
-    println(myMap.view.mapValues(x =>x).toMap)
+    //this shows the same result as above becase it is a
+    //this will iterate the last two values and uses that result to do further processing to the next operation
+    println(lst.reduceRight(_ +_))
 
-    //coverting a string to uppercase
-    println("hello".map(_.toUpper))
-    //printing list of list: List(List(1, 2, 3), List(3, 4, 5, 6))
-    println(List(List(1,2,3), List(3,4,5,6)))
 
-    //this flattens the both list: List(1, 2, 3, 3, 4, 5, 6)
-    println(List(List(1,2,3), List(3,4,5,6)).flatten)
+    //this will add 5 to the total sum so result should be 41 +5  = 46
+    // so 5 +1 = 6 +2 = 8 +........
+    println(lst.foldLeft(5)(_ +_))
+    //this prints ZABC
+    println(lst2.foldLeft("Z")(_ + _))
+    ///gives you all intermediate values
+    //This is what the result looks like: List(100, 101, 103, 106, 111, 118, 128, 141)
+    println(lst.scanLeft(100)(_ + _))
 
-    //this will iterate over every element in the list and adds one to every element and return list of list
-    //this will return:
-    //List(List(1, 2), List(2, 3), List(3, 4), List(4, 5), List(5, 6), List(6, 7), List(10, 11), List(13, 14), List(15, 16))
-    println(lst.map(x => List(x, x+1)))
-
-    //this will return:List(1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 10, 11, 13, 14, 15, 16)
-    println(lst.flatMap(x => List(x, x+1)))
-
-    //this will filter through the list and return anything greater then a 5
-    //The result looks like this: List(6, 10, 13, 15)
-    println(lst.filter(x =>x >5))
+    //this is the result: List(z, zA, zAB, zABC)
+    println(lst2.scanLeft("z")(_ +_))
   }
 }
