@@ -1,35 +1,43 @@
-//Scala - Tuples
-// It is a class that can contains different elements of different data types ( hetrogenous datatypes)
-//Tuples are immutable so once defined it cannot be changed.
+//Scala - Options ( options is a container that give you two value, weather it give instance of some or none.
+
 object Demo {
 
-  //one way to declare a tuple
-  val myTuple = (1, "Subash", true, '3');
+  val lst = List(1,2,3)
+  val map = Map(1 ->"Tom", 2 -> "Max", 3 ->"John")
 
-  //second way to declare a tuple, the Number Tuple3 means that this tuple contains 3 elements
-  //The most elements that can be added using this approach is 22
-  val myTuple1 = new Tuple3(1, "Subash", false)
+  //creating option and initializing empty.
+  val opt: Option[Int] = None;
 
+  val opt1: Option[Int] = Some(10)
   def main(args: Array[String]): Unit = {
 
+    //this prints out None
+   println( lst.find(_ > 6))
 
-    println(myTuple)
+    //this will return 3
+    println(lst.find(_ > 2).get)
 
-    //this will print  subash because it will print second element in the tuple.
-    println(myTuple._2)
+    //this prints out Some(2)
+    //options can give you two kind of result some or none.
+    //find has a return type option
+    println( lst.find(_ > 2))
 
-    //this will print all elements in tuples, we used productIterator because i  can iterate over any type
-    myTuple.productIterator.foreach{
-      i => println(i)
-    }
+    //way to handle when it cannot find
+    println(lst.find(_>6).getOrElse(0))
 
-    //we could create a tuple this way as well, the result here looks like this: (1,subash)
-    println(1 -> "subash")
+    //this returns some(Tom)
+    println(map.get(1))
 
-    //the result looks like this: ((1,subash),true)
-    println(1 -> "subash" -> true)
+    //this will give you the value just like in java i.e. option.get
+    println(map.get(1).get)
 
+    //with map.get(5) it will throw exception because there is no 5 so we need to do getorElse
+    println(map.get(5).getOrElse("No name found"))
 
+    //this should return true
+    println(opt.isEmpty)
 
+    //this should return false because opt1 is not empty
+    println(opt1.isEmpty)
   }
 }
