@@ -1,4 +1,4 @@
-//Scala - Auxilary
+//Scala - Traits
 
 class User(var name: String, private var age: Int){
 
