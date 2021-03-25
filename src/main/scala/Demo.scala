@@ -34,5 +34,9 @@ object Demo {
     //this writes the value to the file
     writer.write(helloCount)
     writer.close()
+
+    //reading from the webn in to source
+    val webData = Source.fromURL("http://www.google.com")
+    println(webData)
   }
 }
