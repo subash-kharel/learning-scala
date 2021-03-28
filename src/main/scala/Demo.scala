@@ -51,6 +51,22 @@ object Demo {
     testObject.addtoQueue("next element")
     Thread.sleep(2000)
     testObject.addtoQueue("end")
+
+
+
+    //how to use thread pool in scala
+    //used to control the number of thread you use inside in app , instead of creating thread of all jobs better to use sleeping threads
+    //better use this method so that we utilized the fullest of the resources and not have tons of unused resources
+
+    import java.util.concurrent.{Executors, ExecutorService}
+    val pool: ExecutorService = Executors.newFixedThreadPool(5)
+
+    pool.execute(testObject)
+    testObject.addtoQueue("First add")
+    Thread.sleep(1000)
+    testObject.addtoQueue("next element")
+    Thread.sleep(2000)
+    testObject.addtoQueue("end")
   }
 
 
