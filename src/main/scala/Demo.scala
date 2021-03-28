@@ -1,4 +1,5 @@
 import java.util.Date
+import scala.concurrent.Promise
 import scala.util.Success
 
 object Demo {
@@ -120,7 +121,55 @@ object Demo {
     import scala.concurrent.duration._
     //this is better way to check and wait for 10 sec then while loop and check isComplete
     Await.result(futureVal2, 10.seconds)
+
+
+
+    //promises
+    //A promises allows two threads to use a future to work together
+    //One thread provides value to the future
+    //Second thread consumes the value once available
+    //The main thread can still do its own thing
+    // avoid thread sync issues
+
+    import scala.concurrent.Promise
+
+    println("-------------------------promises---------------------")
+    //creating a promise
+    val candyPromise = Promise[String]()
+    //creating future associated with this promise
+    val candyFuture = candyPromise.future
+
+    //the future that provides value to the promise
+    val makeCandy = Future {
+         println("Making candy")
+      Thread.sleep(2000)
+      val candy = "Special candy"
+      println("here is your candy -->"+ candy)
+      candyPromise.success(candy)
+      println("Continue other work")
+    }
+
+    //The future that consumes the value
+    val eatCandy = Future {
+      println("Waiting for candy")
+      //Blocked here
+      candyFuture onComplete{
+        case Success(candy)=> println("Got my candy  :"+ candy)
+      }
+      //Continue
+
+      //keep the main thread alive
+      Thread.sleep(5000)
+    }
+
+
+
   }
+
+
+
+
+
 
 
 }
