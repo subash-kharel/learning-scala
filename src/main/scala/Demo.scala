@@ -1,31 +1,57 @@
+import java.util.Date
+
 object Demo {
 
-  def main(args: Array[String]): Unit ={
-    println("Hello World!")
-    val name = "subash"
-    val age = 31
-    //String interpolation using + (similar to java)
-    println(name + " is " + age + " years old")
-    //String interpolation using s (all dynamic variable are denoted by $)
-    //This is called simple string interpolation
-    println(s"$name is $age years old")
-    //String interpolation making the values type safe
-    //this would fail if lets say age was 31.2 or any other decimal because %d is ensuring that the value is integer
-    //and %s is ensuring that the variable is of type string
-    //This is also called formatted string interpolation
-    println(f"$name%s is $age%d years old")
-
-    //Simple string interpolation with escape character
-    //this will print hello and world in different line as such:
-    //hello
-    //world
-    println(s"Hello \nworld")
-
-    //This is an example raw string interpolation
-    //this will print hello \nworld in one line and will skip the \n because it prints the raw object.
-    println(raw"hello \nworld")
+  def main(args: Array[String]): Unit = {
 
 
+    //regular threads
+    //THis is like regular java way
+
+    // concurrency package in scala
+
+    import scala.concurrent._
+    val simpleThread = new Thread(new Runnable {
+      override def run(): Unit = println("THis is a simple thread")
+    })
+    simpleThread.run()
+
+    //A more elaborate example
+    //A typical consumer kinda usecase
+    import java.util.concurrent.{BlockingQueue, LinkedBlockingDeque}
+
+    class TestThread extends Runnable {
+
+      val checkQueue: BlockingQueue[String] = new LinkedBlockingDeque[String]()
+
+      def addtoQueue(elem: String): Unit = {
+        checkQueue.add(elem)
+      }
+
+      def run(): Unit = {
+        var continue = true
+        println("Starting to take from Queue")
+        while (continue) {
+          var elem = checkQueue.take()
+          println("Taken from queue :"+ elem + " at time "+ (new java.util.Date()).toString)
+          if(elem.equals("end")){
+            continue = false
+          }
+
+        }
+        println("Completed taking from queue")
+      }
+    }
+
+    //this is one way to manage threads to make sure it does not error out by using queues
+    val testObject = new TestThread()
+    (new Thread(testObject)).start()
+    testObject.addtoQueue("First add")
+    Thread.sleep(1000)
+    testObject.addtoQueue("next element")
+    Thread.sleep(2000)
+    testObject.addtoQueue("end")
   }
+
 
 }
